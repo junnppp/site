@@ -1,8 +1,10 @@
 # build output
 dist/
-
 # generated types
 .astro/
+
+# pagefind search index (빌드 산출물)
+public/pagefind/
 
 # dependencies
 node_modules/
@@ -13,6 +15,7 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+
 # environment variables
 .env
 .env.production
@@ -22,15 +25,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
-
-# pagefind
-public/pagefind
-
-# pnpm
-.pnpm-store
-
-# docker compose
-compose.override.yaml
 
 # 비공개 초안 — 승격 워크플로(README)와 템플릿만 커밋, 실제 초안 파일은 로컬에만 보관
 src/content/drafts/*

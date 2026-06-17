@@ -1,12 +1,12 @@
 # 초안(draft) 보관소
 
-공개 전 글을 자유롭게 쓰는 비공개 공간입니다. 이 폴더는 빌드 대상(`src/content/posts`) 밖이라 **라이브 사이트에 노출되지 않습니다**. 또한 실제 초안 파일은 `.gitignore`로 제외돼 **GitHub 공개 레포에도 올라가지 않습니다** (이 README와 `_template.md`만 커밋됨).
+공개 전 글을 자유롭게 쓰는 비공개 공간입니다. 이 폴더는 빌드 대상(`src/content/blog`) 밖이라 **라이브 사이트에 노출되지 않습니다**. 또한 실제 초안 파일은 `.gitignore`로 제외돼 **GitHub 공개 레포에도 올라가지 않습니다** (이 README와 `_template.md`만 커밋됨).
 
 ## 워크플로
 
 1. `_template.md`를 복사해 이 폴더에 새 초안을 씁니다. 공개 압박 없이 자유롭게.
 2. 글이 다듬어지면 아래 **승격 체크리스트**를 통과시킵니다.
-3. 통과하면 파일을 `src/content/posts/`로 옮기고 `draft: false`로 바꿔 커밋합니다. 커밋 → 푸시되면 라이브.
+3. 통과하면 글을 `src/content/blog/<슬러그>/index.md`로 옮기고 `draft: false`로 바꿔 커밋합니다. 커밋 → 푸시되면 라이브.
 
 ## 승격 체크리스트 (confidentiality 게이트)
 

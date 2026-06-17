@@ -1,36 +1,13 @@
 ---
-import { getEntry, render } from "astro:content";
-import Layout from "@/layouts/Layout.astro";
-import Header from "@/components/Header.astro";
-import Breadcrumb from "@/components/Breadcrumb.astro";
-import Main from "@/components/Main.astro";
-import Footer from "@/components/Footer.astro";
-import config from "@/config";
-
-const resume = await getEntry("pages", "resume");
-
-if (!resume) {
-  throw new Error(
-    "Missing content entry: `resume.md` or `resume.mdx` in `src/content/pages/`"
-  );
-}
-
-const { Content } = await render(resume);
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/Container.astro";
+import { Content, frontmatter } from "../data/resume.md";
 ---
 
-<Layout
-  title={`${resume.data.title} | ${config.site.title}`}
-  description={resume.data.description}
-  ogImage={resume.data.ogImage}
-  canonicalURL={resume.data.canonicalURL}
->
-  <Header />
-
-  <Breadcrumb />
-
-  <Main pageTitle={resume.data.title} class="app-prose">
-    <Content />
-  </Main>
-
-  <Footer />
+<Layout title={frontmatter.title} description={frontmatter.description}>
+  <Container>
+    <article class="animate">
+      <Content />
+    </article>
+  </Container>
 </Layout>
