@@ -1,0 +1,108 @@
+---
+// 본문(article) 이미지 클릭 확대 — 자체 vanilla JS, 의존성 0.
+// 이벤트 위임(document 1회 등록)이라 View Transitions(ClientRouter) 페이지 전환에도 살아남는다.
+// 오버레이 요소는 Layout 에 상주하고, 리스너가 클릭 시점에 getElementById 로 참조한다.
+---
+
+<div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-modal="true">
+  <img id="lightbox-img" src="" alt="" />
+</div>
+
+<style>
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(1rem, 4vw, 3rem);
+    background: rgba(10, 10, 10, 0.82);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.25s ease,
+      visibility 0.25s ease;
+    cursor: zoom-out;
+  }
+
+  .lightbox.open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .lightbox img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+    background: #ffffff;
+    transform: scale(0.97);
+    transition: transform 0.25s ease;
+  }
+
+  .lightbox.open img {
+    transform: scale(1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lightbox,
+    .lightbox img {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  function setup() {
+    if ((window as any).__lightboxInit) return;
+    (window as any).__lightboxInit = true;
+
+    const getBox = () => document.getElementById("lightbox");
+    const getImg = () =>
+      document.getElementById("lightbox-img") as HTMLImageElement | null;
+
+    function open(src: string, alt: string) {
+      const box = getBox();
+      const img = getImg();
+      if (!box || !img) return;
+      img.src = src;
+      img.alt = alt;
+      box.classList.add("open");
+      box.setAttribute("aria-hidden", "false");
+      document.documentElement.style.overflow = "hidden";
+    }
+
+    function close() {
+      const box = getBox();
+      if (!box || !box.classList.contains("open")) return;
+      box.classList.remove("open");
+      box.setAttribute("aria-hidden", "true");
+      document.documentElement.style.overflow = "";
+    }
+
+    // 본문 이미지 클릭 → 열기 / 오버레이 클릭 → 닫기 (위임 1회)
+    document.addEventListener("click", (e) => {
+      const t = e.target as Element | null;
+      if (t instanceof HTMLImageElement && t.closest("article")) {
+        open(t.currentSrc || t.src, t.alt || "");
+        return;
+      }
+      const box = getBox();
+      if (box && box.classList.contains("open") && t && box.contains(t)) {
+        close();
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") close();
+    });
+  }
+
+  setup();
+</script>

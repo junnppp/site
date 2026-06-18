@@ -1,81 +1,62 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 470" width="760" height="470"
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 440" width="720" height="440"
      font-family="Pretendard, 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif">
-  <defs>
-    <marker id="axArr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#555"/>
-    </marker>
-    <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.10"/>
-    </filter>
-  </defs>
-  <rect width="760" height="470" fill="#FFFFFF"/>
+  <!-- 배경 카드 (아이보리 — 페이지 배경과 구분 + 다크모드에서도 항상 밝게) -->
+  <rect x="0.6" y="0.6" width="718.8" height="438.8" rx="14" fill="#F8F1E1" stroke="#DFD5C0" stroke-width="1.2"/>
 
-  <!-- 제목 -->
-  <text x="380" y="34" text-anchor="middle" font-size="22" font-weight="800" fill="#1B3C5E">망각 곡선과 능동적 회상</text>
-  <text x="380" y="56" text-anchor="middle" font-size="12.5" fill="#46627F">복습 시점마다 능동적으로 떠올리면, 망각이 느려지고 기억이 오래 남는다</text>
+  <!-- 타이틀 -->
+  <text x="360" y="44" text-anchor="middle" font-size="22" font-weight="700" fill="#1A1A1A">망각 곡선과 능동적 회상</text>
 
-  <!-- y축 그리드 라인 -->
-  <line x1="80" y1="70" x2="700" y2="70" stroke="#ECECEC" stroke-width="1"/>
-  <line x1="80" y1="215" x2="700" y2="215" stroke="#ECECEC" stroke-width="1"/>
+  <!-- y축 그리드 (옅게) -->
+  <line x1="64" y1="84" x2="692" y2="84" stroke="#EAE1CE" stroke-width="1"/>
+  <line x1="64" y1="222" x2="692" y2="222" stroke="#EAE1CE" stroke-width="1"/>
 
   <!-- 축 -->
-  <line x1="80" y1="360" x2="80" y2="62" stroke="#555" stroke-width="1.4" marker-end="url(#axArr)"/>
-  <line x1="80" y1="360" x2="714" y2="360" stroke="#555" stroke-width="1.4" marker-end="url(#axArr)"/>
+  <line x1="64" y1="84" x2="64" y2="360" stroke="#C4BEB0" stroke-width="1.2"/>
+  <line x1="64" y1="360" x2="692" y2="360" stroke="#C4BEB0" stroke-width="1.2"/>
 
   <!-- y축 눈금 라벨 -->
-  <text x="72" y="74" text-anchor="end" font-size="10.5" fill="#888">100%</text>
-  <text x="72" y="219" text-anchor="end" font-size="10.5" fill="#888">50%</text>
-  <text x="72" y="364" text-anchor="end" font-size="10.5" fill="#888">0%</text>
-  <text x="30" y="215" text-anchor="middle" font-size="11.5" font-weight="700" fill="#46627F"
-        transform="rotate(-90 30 215)">기억 보유율</text>
+  <text x="56" y="90" text-anchor="end" font-size="15" fill="#374151">100%</text>
+  <text x="56" y="228" text-anchor="end" font-size="15" fill="#374151">50%</text>
+  <text x="56" y="366" text-anchor="end" font-size="15" fill="#374151">0%</text>
 
-  <!-- x축 라벨 -->
-  <text x="708" y="380" text-anchor="end" font-size="11.5" font-weight="700" fill="#555">시간(일) →</text>
+  <!-- y축 제목 -->
+  <text x="20" y="222" text-anchor="middle" font-size="16" font-weight="700" fill="#1F2937"
+        transform="rotate(-90 20 222)">기억 보유율</text>
 
-  <!-- 복습 시점 수직 가이드 (점선) -->
-  <line x1="100.67" y1="70" x2="100.67" y2="360" stroke="#E5C99A" stroke-width="1" stroke-dasharray="3 3"/>
-  <line x1="142" y1="70" x2="142" y2="360" stroke="#E5C99A" stroke-width="1" stroke-dasharray="3 3"/>
-  <line x1="224.67" y1="70" x2="224.67" y2="360" stroke="#E5C99A" stroke-width="1" stroke-dasharray="3 3"/>
-  <line x1="390" y1="70" x2="390" y2="360" stroke="#E5C99A" stroke-width="1" stroke-dasharray="3 3"/>
+  <!-- x축 눈금 라벨 (복습 시점 + 종료) -->
+  <text x="84.93" y="382" text-anchor="middle" font-size="15" fill="#374151">1일</text>
+  <text x="126.8" y="382" text-anchor="middle" font-size="15" fill="#374151">3일</text>
+  <text x="210.5" y="382" text-anchor="middle" font-size="15" fill="#374151">7일</text>
+  <text x="378" y="382" text-anchor="middle" font-size="15" fill="#374151">15일</text>
+  <text x="692" y="382" text-anchor="middle" font-size="15" fill="#374151">30일</text>
 
-  <!-- x축 day 라벨 -->
-  <text x="100.67" y="376" text-anchor="middle" font-size="10.5" fill="#7B5E2E">1일</text>
-  <text x="142" y="376" text-anchor="middle" font-size="10.5" fill="#7B5E2E">3일</text>
-  <text x="224.67" y="376" text-anchor="middle" font-size="10.5" fill="#7B5E2E">7일</text>
-  <text x="390" y="376" text-anchor="middle" font-size="10.5" fill="#7B5E2E">15일</text>
+  <!-- x축 제목 -->
+  <text x="378" y="408" text-anchor="middle" font-size="16" font-weight="700" fill="#1F2937">시간(일)</text>
 
-  <!-- 복습 없음 곡선 (점선 회색) -->
-  <polyline points="80,70 90.33,133.8 100.67,183.1 111,219.9 121.33,248.1 142,285.5 162.67,307.2 204,327.1 266,335.1 369.33,336.8 700,336.8"
+  <!-- 복습 없음 곡선 (회색 점선 — 중립) -->
+  <polyline points="64,84 74.5,144.7 84.93,191.6 95.4,226.7 105.9,253.5 126.8,289 147.7,309.8 189.6,328.5 252.4,336.3 357.1,337.9 692,337.9"
             fill="none" stroke="#9AA0A6" stroke-width="2" stroke-dasharray="6 4" stroke-linejoin="round" stroke-linecap="round"/>
 
-  <!-- Active Recall 곡선 (파란 실선, 톱니) -->
-  <path d="M80,70 L90.33,133.8 L100.67,183.1
-           L100.67,70
-           L121.33,116.4 L142,151.2
-           L142,70
-           L183.33,110.6 L224.67,139.6
-           L224.67,70
-           L307.33,104.8 L390,128
-           L390,70
-           L534.67,96.1 L700,110.6"
-        fill="none" stroke="#3D6FA5" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+  <!-- Active Recall 곡선 (salmon 강조 — 감소 구간은 지수 곡선으로 부드럽게, 재강화만 수직) -->
+  <path d="M64,84 L69.2,116 L74.5,144.4 L79.7,169.6 L84.93,191.6
+           L84.93,84
+           L95.4,105.8 L105.9,125.7 L116.3,144.2 L126.8,161.3
+           L126.8,84
+           L147.7,102.2 L168.7,119.3 L189.6,135.3 L210.5,150.2
+           L210.5,84
+           L252.4,98.9 L294.3,113.3 L336.2,126.5 L378,139.2
+           L378,84
+           L456.5,94.2 L535,104.1 L613.5,113.5 L692,122.6"
+        fill="none" stroke="#C2603F" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/>
 
-  <!-- 복습 시점 마커 (재강화 지점) -->
-  <circle cx="100.67" cy="70" r="4.5" fill="#D38929" stroke="#FFFFFF" stroke-width="1.5"/>
-  <circle cx="142" cy="70" r="4.5" fill="#D38929" stroke="#FFFFFF" stroke-width="1.5"/>
-  <circle cx="224.67" cy="70" r="4.5" fill="#D38929" stroke="#FFFFFF" stroke-width="1.5"/>
-  <circle cx="390" cy="70" r="4.5" fill="#D38929" stroke="#FFFFFF" stroke-width="1.5"/>
-  <text x="142" y="60" text-anchor="middle" font-size="10.5" font-weight="700" fill="#7B5E2E">↑ 복습(능동 회상) 시점</text>
+  <!-- 복습(재강화) 시점 마커 -->
+  <circle cx="84.93" cy="84" r="4.5" fill="#C2603F" stroke="#F8F1E1" stroke-width="1.5"/>
+  <circle cx="126.8" cy="84" r="4.5" fill="#C2603F" stroke="#F8F1E1" stroke-width="1.5"/>
+  <circle cx="210.5" cy="84" r="4.5" fill="#C2603F" stroke="#F8F1E1" stroke-width="1.5"/>
+  <circle cx="378" cy="84" r="4.5" fill="#C2603F" stroke="#F8F1E1" stroke-width="1.5"/>
+  <text x="247" y="74" text-anchor="middle" font-size="15" font-weight="700" fill="#374151">↑ 복습(능동 회상) 시점</text>
 
-  <!-- 곡선 끝 직접 라벨 -->
-  <text x="690" y="103" text-anchor="end" font-size="11.5" font-weight="700" fill="#3D6FA5">Active Recall</text>
-  <text x="690" y="329" text-anchor="end" font-size="11" fill="#9AA0A6">복습 없음 (자연 망각)</text>
-
-  <!-- 하단 범례 -->
-  <line x1="190" y1="430" x2="222" y2="430" stroke="#9AA0A6" stroke-width="2" stroke-dasharray="6 4"/>
-  <text x="230" y="434" font-size="11.5" fill="#555">복습 없음 — 시간이 지날수록 빠르게 잊는다</text>
-
-  <line x1="190" y1="450" x2="222" y2="450" stroke="#3D6FA5" stroke-width="2.6"/>
-  <circle cx="206" cy="450" r="4" fill="#D38929" stroke="#FFFFFF" stroke-width="1.2"/>
-  <text x="230" y="454" font-size="11.5" fill="#555">Active Recall — 복습마다 재강화되고 망각이 완만해진다</text>
+  <!-- 곡선 끝 직접 라벨 (범례 대신 — 곡선과 안 겹치게 위/아래로 분리) -->
+  <text x="690" y="100" text-anchor="end" font-size="16.5" font-weight="700" fill="#1A1A1A">Active Recall</text>
+  <text x="690" y="356" text-anchor="end" font-size="15" fill="#6B7280">복습 없음</text>
 </svg>

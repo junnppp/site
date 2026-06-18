@@ -83,6 +83,10 @@
     @apply text-black dark:text-white;
     @apply decoration-black/50 dark:decoration-white/50;
   }
+  /* 본문 이미지: 클릭 확대(Lightbox) 커서 + 살짝 둥근 모서리 */
+  article img {
+    @apply cursor-zoom-in rounded-lg;
+  }
 }
 
 .animate {
