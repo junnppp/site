@@ -3,6 +3,7 @@ title: "소재 측정 고도화 — Hook Testing"
 description: "고성과 구간 재배치로 CTR 30%↑"
 date: 2025-03-01
 result: "CTR +30%"
+ghost: "+30%"
 ---
 
 CTR이 낮다고 폐기되던 영상 소재를, 노출단 분석으로 살려낸 사례입니다.

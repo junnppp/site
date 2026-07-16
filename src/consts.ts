@@ -9,9 +9,9 @@ export const SITE: Site = {
 };
 
 export const HOME: Metadata = {
-  TITLE: "Home",
+  TITLE: "이력서",
   DESCRIPTION:
-    "박준혁 · Data Analyst. 게임 데이터로 마케팅·사업 의사결정을 돕습니다.",
+    "박준혁 · Data Analyst 이력서. 조이시티에서 게임 데이터 기반 마케팅·사업 분석을 합니다.",
 };
 
 export const PROJECTS: Metadata = {

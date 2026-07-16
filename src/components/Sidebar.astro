@@ -1,0 +1,45 @@
+---
+import { SITE, SOCIALS } from "@consts";
+
+const path = Astro.url.pathname;
+const isProjects = path.startsWith("/projects");
+const isResume = !isProjects;
+
+const navItem = "w-fit transition-[color,transform] duration-300 ease-out hover:translate-x-1";
+const on = "text-accent";
+const off = "text-sub hover:text-ink";
+---
+
+<aside class="self-start sm:sticky sm:top-10">
+  <a href="/" class="font-semibold text-ink">{SITE.TITLE}</a>
+  <p class="mb-7 text-sm text-sub">Data Analyst · Joycity</p>
+  <nav
+    class="mb-7 flex flex-row gap-x-5 gap-y-2 text-[0.9rem] sm:flex-col"
+    aria-label="주 메뉴"
+  >
+    <a href="/" class:list={[navItem, isResume ? on : off]}>이력서</a>
+    <a href="/projects" class:list={[navItem, isProjects ? on : off]}>
+      포트폴리오
+    </a>
+  </nav>
+  <div class="flex flex-col gap-y-1 text-xs leading-6 text-sub">
+    <a
+      href={`mailto:${SITE.EMAIL}`}
+      class="w-fit transition-colors duration-300 hover:text-ink"
+    >
+      {SITE.EMAIL}
+    </a>
+    {
+      SOCIALS.map((social) => (
+        <a
+          href={social.HREF}
+          target="_blank"
+          class="w-fit transition-colors duration-300 hover:text-ink"
+          aria-label={`${SITE.TITLE} on ${social.NAME}`}
+        >
+          {social.HREF.replace("https://", "")}
+        </a>
+      ))
+    }
+  </div>
+</aside>
