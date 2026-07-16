@@ -30,3 +30,9 @@ pnpm-debug.log*
 src/content/drafts/*
 !src/content/drafts/README.md
 !src/content/drafts/_template.md
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
