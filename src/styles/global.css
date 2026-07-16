@@ -2,42 +2,36 @@
 
 @plugin '@tailwindcss/typography';
 
-@custom-variant dark (&:is(.dark *));
-
 @theme {
   --font-sans: Geist Sans, ui-sans-serif, system-ui, sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   --font-mono: Geist Mono, ui-monospace, SFMono-Regular, Menlo, Monaco,
     Consolas, 'Liberation Mono', 'Courier New', monospace;
+
+  /* Split Stage — 다크 커밋 팔레트 */
+  --color-page: #0e1013;
+  --color-ink: #e9eaec;
+  --color-soft: #c6c9cd;
+  --color-sub: #878b92;
+  --color-line: #23252a;
+  --color-accent: #dfa33c;
 }
 
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
 @layer base {
   *,
   ::after,
   ::before,
   ::backdrop,
   ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
+    border-color: var(--color-line);
   }
 }
 
 @layer utilities {
   html {
     overflow-y: auto;
-    color-scheme: light;
-    scroll-padding-top: 100px;
-  }
-
-  html.dark {
     color-scheme: dark;
+    scroll-padding-top: 40px;
   }
 
   html,
@@ -47,41 +41,29 @@
 
   body {
     @apply font-sans antialiased;
-    @apply flex flex-col;
-    @apply bg-neutral-50 dark:bg-neutral-900;
-    @apply text-black/75 dark:text-white/75;
-  }
-
-  header {
-    @apply fixed left-0 right-0 top-0 z-50 py-6;
-    @apply bg-neutral-50/75 dark:bg-neutral-900/75;
-    @apply saturate-200 backdrop-blur-xs;
-  }
-
-  main {
-    @apply flex-1 py-32;
-  }
-
-  footer {
-    @apply py-6 text-sm;
+    @apply bg-page text-soft;
   }
 
   article {
-    @apply prose prose-neutral max-w-full dark:prose-invert prose-img:mx-auto prose-img:my-auto;
-    @apply prose-headings:font-semibold;
-    @apply prose-headings:text-black dark:prose-headings:text-white;
+    @apply prose prose-invert max-w-full prose-img:mx-auto prose-img:my-auto;
+    @apply prose-p:text-soft prose-li:text-soft prose-strong:text-ink;
+    @apply prose-headings:font-semibold prose-headings:text-ink;
+  }
+
+  /* 케이스 상세: 섹션 제목(문제/가설/분석/결과)을 스몰캡 라벨로 */
+  article h2 {
+    @apply mt-10 mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-sub;
   }
 }
 
 @layer utilities {
   article a {
     @apply font-sans text-current underline underline-offset-[3px];
-    @apply decoration-black/30 dark:decoration-white/30;
+    @apply decoration-white/25;
     @apply transition-colors duration-300 ease-in-out;
   }
   article a:hover {
-    @apply text-black dark:text-white;
-    @apply decoration-black/50 dark:decoration-white/50;
+    @apply text-ink decoration-accent;
   }
   /* 본문 이미지: 클릭 확대(Lightbox) 커서 + 살짝 둥근 모서리 */
   article img {
@@ -98,34 +80,12 @@
   @apply translate-y-0 opacity-100;
 }
 
-html #back-to-top {
-  @apply pointer-events-none opacity-0;
-}
-
-html.scrolled #back-to-top {
-  @apply pointer-events-auto opacity-100;
-}
-
 /* shiki config */
 pre {
-  @apply border border-black/15 py-5 dark:border-white/20;
+  @apply border border-line py-5;
 }
 
 :root {
-  --astro-code-foreground: #09090b;
-  --astro-code-background: #fafafa;
-  --astro-code-token-comment: #a19595;
-  --astro-code-token-keyword: #f47067;
-  --astro-code-token-string: #00a99a;
-  --astro-code-token-function: #429996;
-  --astro-code-token-constant: #2b70c5;
-  --astro-code-token-parameter: #4e8fdf;
-  --astro-code-token-string-expression: #ae42a0;
-  --astro-code-token-punctuation: #8996a3;
-  --astro-code-token-link: #8d85ff;
-}
-
-.dark {
   --astro-code-foreground: #fafafa;
   --astro-code-background: #09090b;
   --astro-code-token-comment: #a19595;
@@ -141,11 +101,11 @@ pre {
 
 /* copy code button on codeblocks */
 .copy-code {
-  @apply absolute right-3 top-3 grid size-9 place-content-center rounded-sm border border-black/15 bg-neutral-100 text-center duration-300 ease-in-out dark:border-white/20 dark:bg-neutral-900;
+  @apply absolute right-3 top-3 grid size-9 place-content-center rounded-sm border border-line bg-[#16181d] text-center duration-300 ease-in-out;
 }
 
 .copy-code:hover {
-  @apply bg-[#E9E9E9] transition-colors dark:bg-[#232323];
+  @apply bg-[#232323] transition-colors;
 }
 
 .copy-code:active {

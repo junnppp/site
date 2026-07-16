@@ -2,6 +2,8 @@
 title: "광고 노출 최적화 — Frequency Capping"
 description: "빈도 제한으로 BAU 대비 단가 10%↓ · D7 ROAS 2.1배↑"
 date: 2025-06-01
+result: "D7 ROAS 2.1×"
+ghost: "2.1×"
 ---
 
 단순 감액 이전에 무의미한 노출을 제한해 효율을 끌어올린 사례입니다.

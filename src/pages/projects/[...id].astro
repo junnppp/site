@@ -1,69 +1,82 @@
 ---
 import { type CollectionEntry, getCollection, render } from "astro:content";
 import Layout from "@layouts/Layout.astro";
-import Container from "@components/Container.astro";
 import FormattedDate from "@components/FormattedDate.astro";
-import { readingTime } from "@lib/utils";
-import BackToPrevious from "@components/BackToPrevious.astro";
-import Link from "@components/Link.astro";
-import TableOfContents from "@components/TableOfContents.astro";
 
 export async function getStaticPaths() {
   const projects = (await getCollection("projects"))
     .filter((post) => !post.data.draft)
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-  return projects.map((project) => ({
+  return projects.map((project, i) => ({
     params: { id: project.id },
-    props: project,
+    props: {
+      project,
+      // 목록과 같은 최신순 기준 이전/다음 (순환)
+      prev: projects[(i - 1 + projects.length) % projects.length],
+      next: projects[(i + 1) % projects.length],
+    },
   }));
 }
-type Props = CollectionEntry<"projects">;
+type Props = {
+  project: CollectionEntry<"projects">;
+  prev: CollectionEntry<"projects">;
+  next: CollectionEntry<"projects">;
+};
 
-const project = Astro.props;
-const { Content, headings } = await render(project);
+const { project, prev, next } = Astro.props;
+const { Content } = await render(project);
 ---
 
 <Layout title={project.data.title} description={project.data.description}>
-  <Container>
-    <div class="animate">
-      <BackToPrevious href="/projects">Back to projects</BackToPrevious>
-    </div>
-    <div class="animate my-10 space-y-1">
-      <div class="flex items-center gap-1.5">
-        <div class="font-base text-sm">
-          <FormattedDate date={project.data.date} />
-        </div>
-        &bull;
-        {project.body && (
-          <div class="font-base text-sm">
-            {readingTime(project.body)}
-          </div>
-        )}     
-      </div>
-      <h1 class="text-3xl font-semibold text-black dark:text-white">
-        {project.data.title}
-      </h1>
-      {
-        (project.data.demoURL || project.data.repoURL) && (
-          <nav class="flex gap-1">
-            {project.data.demoURL && (
-              <Link href={project.data.demoURL} external>
-                demo
-              </Link>
-            )}
-            {project.data.demoURL && project.data.repoURL && <span>/</span>}
-            {project.data.repoURL && (
-              <Link href={project.data.repoURL} external>
-                repo
-              </Link>
-            )}
-          </nav>
-        )
-      }
-    </div>
-    <TableOfContents headings={headings} />
-    <article class="animate">
-      <Content />
-    </article>
-  </Container>
+  <a
+    href="/projects"
+    class="animate inline-block text-sm text-sub transition-[color,transform] duration-300 hover:-translate-x-1 hover:text-ink"
+  >
+    ← 포트폴리오
+  </a>
+
+  <div class="animate mt-7 mb-9">
+    {
+      project.data.result && (
+        <p class="mb-1.5 text-[0.74rem] font-medium uppercase tracking-[0.07em] text-accent tabular-nums">
+          {project.data.result}
+        </p>
+      )
+    }
+    <h1
+      class="text-2xl leading-snug font-bold tracking-tight text-ink text-balance"
+    >
+      {project.data.title}
+    </h1>
+    <p class="mt-1 text-sm text-sub">
+      <FormattedDate date={project.data.date} />
+    </p>
+  </div>
+
+  <article class="animate">
+    <Content />
+  </article>
+
+  <nav
+    class="animate mt-14 flex justify-between gap-6 border-t border-line pt-4 text-sm"
+  >
+    <a
+      href={`/projects/${prev.id}`}
+      class="max-w-[46%] text-sub transition-colors duration-300 hover:text-ink"
+    >
+      <span class="mb-0.5 block text-[0.68rem] uppercase tracking-[0.1em]">
+        ← 이전
+      </span>
+      {prev.data.title}
+    </a>
+    <a
+      href={`/projects/${next.id}`}
+      class="max-w-[46%] text-right text-sub transition-colors duration-300 hover:text-ink"
+    >
+      <span class="mb-0.5 block text-[0.68rem] uppercase tracking-[0.1em]">
+        다음 →
+      </span>
+      {next.data.title}
+    </a>
+  </nav>
 </Layout>

@@ -2,6 +2,8 @@
 title: "소재 측정 고도화 — Assist CTR (MTA)"
 description: "타 소재 클릭 유입 기여를 측정하는 Assist CTR 지표 구축"
 date: 2025-11-01
+result: "신규 지표 · Assist CTR"
+ghost: "MTA"
 ---
 
 마케팅 소재 성과를 단일 지표로만 보던 한계를 MTA 관점에서 보완한 사례입니다. 수치는 비율로 추상화했습니다.

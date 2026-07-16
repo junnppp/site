@@ -1,126 +1,122 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import Container from "@components/Container.astro";
-import { SITE, HOME, SOCIALS } from "@consts";
-import ArrowCard from "@components/ArrowCard.astro";
-import Link from "@components/Link.astro";
-import { getCollection } from "astro:content";
-import type { CollectionEntry } from "astro:content";
+import { HOME } from "@consts";
 
-const blog = (await getCollection("blog"))
-  .filter((post) => !post.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, SITE.NUM_POSTS_ON_HOMEPAGE);
-
-const projects: CollectionEntry<"projects">[] = (
-  await getCollection("projects")
-)
-  .filter((project) => !project.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, SITE.NUM_PROJECTS_ON_HOMEPAGE);
+const certificates = [
+  {
+    name: "Applied Data Science with Python",
+    href: "https://www.coursera.org/account/accomplishments/specialization/certificate/ZSGWV9ENWW59",
+  },
+  {
+    name: "Learn SQL Basics for Data Science",
+    href: "https://www.coursera.org/account/accomplishments/specialization/certificate/GZ8AQARFLSVE",
+  },
+  {
+    name: "Data Visualization with Tableau",
+    href: "https://www.coursera.org/account/accomplishments/specialization/certificate/UJ4JZG8HW2DM",
+  },
+];
 ---
 
 <Layout title={HOME.TITLE} description={HOME.DESCRIPTION}>
-  <Container>
-    <aside data-pagefind-ignore>
-      <h1 class="font-semibold text-black dark:text-white">
-        박준혁 · Data Analyst
-      </h1>
-      <div class="space-y-16">
-        <section>
-          <article class="space-y-4">
-            <span>
-              <p>
-                조이시티에서 게임 데이터로 마케팅/사업 의사결정을 돕는 데이터
-                분석가입니다. SQL/Python로 분석하고, 검증된 수치 근거로
-                빠른 답보다 맞는 답을 찾는 데 집중합니다.
-              </p>
-              <p>
-                반짝이는 한 방보다 꾸준히 공부하고 기록하며 성장하는 과정을
-                이곳에 남깁니다.
-              </p>
-            </span>
-            <span class="animate">
-              <p>
-                걸어온 길은 <Link href="/resume">이력서</Link>, 해온 일은 <Link
-                  href="/projects">포트폴리오</Link
-                >, 공부와 기록은 <Link href="/blog">블로그</Link>에 있습니다.
-              </p>
-            </span>
-          </article>
-        </section>
+  <h1 class="animate text-lg font-bold tracking-tight text-ink">이력서</h1>
+  <p class="animate mt-2 mb-11 max-w-[48ch] text-[0.95rem] text-sub">
+    게임 데이터로 마케팅·사업 의사결정을 돕는 데이터 분석가입니다. SQL ·
+    Python · BigQuery로 분석하고, 검증된 수치 근거로 빠른 답보다 맞는 답을
+    찾는 데 집중합니다.
+  </p>
 
-        <section class="animate space-y-6">
-          <div class="flex flex-wrap items-center justify-between gap-y-2">
-            <h2 class="font-semibold text-black dark:text-white">
-              최근 글
-            </h2>
-            <Link href="/blog"> 전체 글 </Link>
-          </div>
-          <ul class="not-prose flex flex-col gap-4">
-            {
-              blog.map((post) => (
-                <li>
-                  <ArrowCard entry={post} />
-                </li>
-              ))
-            }
-          </ul>
-        </section>
+  <section class="animate mb-10">
+    <h2 class="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-sub">
+      Skills
+    </h2>
+    <p class="text-[0.95rem]">SQL · Python · Excel · Tableau · BigQuery · Notion</p>
+  </section>
 
-        <section class="animate space-y-6">
-          <div class="flex flex-wrap items-center justify-between gap-y-2">
-            <h2 class="font-semibold text-black dark:text-white">
-              포트폴리오
-            </h2>
-            <Link href="/projects"> 전체 보기 </Link>
-          </div>
-          <ul class="not-prose flex flex-col gap-4">
-            {
-              projects.map((project) => (
-                <li>
-                  <ArrowCard entry={project} />
-                </li>
-              ))
-            }
-          </ul>
-        </section>
-
-        <section class="animate space-y-4">
-          <h2 class="font-semibold text-black dark:text-white">
-            연락하기
-          </h2>
-          <article>
-            <p>
-              분석/협업/채용 관련해서는 이메일로 편하게 연락 주세요.
-            </p>
-          </article>
-          <ul class="not-prose flex flex-wrap gap-2">
-            {
-              SOCIALS.map((SOCIAL) => (
-                <li class="flex gap-x-2 text-nowrap">
-                  <Link
-                    href={SOCIAL.HREF}
-                    external
-                    aria-label={`${SITE.TITLE} on ${SOCIAL.NAME}`}
-                  >
-                    {SOCIAL.NAME}
-                  </Link>
-                  {"/"}
-                </li>
-              ))
-            }
-            <li class="line-clamp-1">
-              <Link
-                href={`mailto:${SITE.EMAIL}`}
-                aria-label={`Email ${SITE.TITLE}`}
-              >
-                {SITE.EMAIL}
-              </Link>
-            </li>
-          </ul>
-        </section>
+  <section class="animate mb-10">
+    <h2 class="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-sub">
+      Experience
+    </h2>
+    <div class="border-t border-line py-3.5">
+      <div class="flex items-baseline justify-between gap-4">
+        <b class="text-[0.95rem] font-semibold text-ink">
+          조이시티 (Joycity) — Data Analyst
+        </b>
+        <span class="shrink-0 text-xs text-sub tabular-nums">2023.09 — 현재</span>
       </div>
-    </aside>
-  </Container>
+      <ul class="mt-2 flex list-disc flex-col gap-1 pl-4 text-sm">
+        <li>매출 시뮬레이션 기반 사업성 검토 · 월별 Sales KPI 설정 및 트래킹</li>
+        <li>ROAS KPI 설계, 매체 운영 고도화 (Meta · Google · Ad Network)</li>
+        <li>대규모 업데이트 효과 분석, Business Model 사업성 검토</li>
+      </ul>
+    </div>
+    <div class="border-t border-line py-3.5">
+      <div class="flex items-baseline justify-between gap-4">
+        <b class="text-[0.95rem] font-semibold text-ink">
+          스패로우 (Sparrow) — Digital Marketing Intern
+        </b>
+        <span class="shrink-0 text-xs text-sub tabular-nums">
+          2021.06 — 2021.08
+        </span>
+      </div>
+      <p class="mt-1 text-sm text-sub">
+        세미나 참가자 데이터 분석으로 타겟 성향 도출, 콘텐츠 제작
+      </p>
+    </div>
+    <div class="border-y border-line py-3.5">
+      <div class="flex items-baseline justify-between gap-4">
+        <b class="text-[0.95rem] font-semibold text-ink">
+          삐에아떼르 (pied à terre) — Digital Marketing Intern
+        </b>
+        <span class="shrink-0 text-xs text-sub tabular-nums">
+          2020.12 — 2021.06
+        </span>
+      </div>
+      <p class="mt-1 text-sm text-sub">
+        네이버 애널리틱스 기반 세그먼트별 콘텐츠로 데일리 방문자 약 200명 유치
+      </p>
+    </div>
+  </section>
+
+  <section class="animate mb-10">
+    <h2 class="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-sub">
+      Education
+    </h2>
+    <div class="border-y border-line py-3.5">
+      <div class="flex items-baseline justify-between gap-4">
+        <b class="text-[0.95rem] font-semibold text-ink">
+          위스콘신 대학교 (University of Wisconsin–Madison)
+        </b>
+        <span class="shrink-0 text-xs text-sub tabular-nums">
+          2017.08 — 2023.05
+        </span>
+      </div>
+      <p class="mt-1 text-sm text-sub">
+        통계학 · 데이터 과학 복수 전공 · GPA 3.87/4.00
+      </p>
+    </div>
+  </section>
+
+  <section class="animate">
+    <h2 class="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-sub">
+      Certificates
+    </h2>
+    <p class="text-sm">
+      Coursera 2022 —
+      {
+        certificates.map((cert, i) => (
+          <>
+            <a
+              href={cert.href}
+              target="_blank"
+              class="text-soft underline decoration-white/25 underline-offset-[3px] transition-colors duration-300 hover:text-ink hover:decoration-accent"
+            >
+              {cert.name}
+            </a>
+            {i < certificates.length - 1 && " · "}
+          </>
+        ))
+      }
+    </p>
+  </section>
 </Layout>
