@@ -2,15 +2,9 @@
 import Layout from "@layouts/Layout.astro";
 import Container from "@components/Container.astro";
 import { SITE, HOME, SOCIALS } from "@consts";
-import ArrowCard from "@components/ArrowCard.astro";
 import Link from "@components/Link.astro";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
-
-const blog = (await getCollection("blog"))
-  .filter((post) => !post.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, SITE.NUM_POSTS_ON_HOMEPAGE);
 
 const projects: CollectionEntry<"projects">[] = (
   await getCollection("projects")
@@ -22,95 +16,100 @@ const projects: CollectionEntry<"projects">[] = (
 
 <Layout title={HOME.TITLE} description={HOME.DESCRIPTION}>
   <Container>
-    <aside data-pagefind-ignore>
+    <aside>
       <h1 class="font-semibold text-black dark:text-white">
         박준혁 · Data Analyst
       </h1>
-      <div class="space-y-16">
-        <section>
-          <article class="space-y-4">
-            <span>
-              <p>
-                조이시티에서 게임 데이터로 마케팅/사업 의사결정을 돕는 데이터
-                분석가입니다. SQL/Python로 분석하고, 검증된 수치 근거로
-                빠른 답보다 맞는 답을 찾는 데 집중합니다.
-              </p>
-              <p>
-                반짝이는 한 방보다 꾸준히 공부하고 기록하며 성장하는 과정을
-                이곳에 남깁니다.
-              </p>
-            </span>
-            <span class="animate">
-              <p>
-                걸어온 길은 <Link href="/resume">이력서</Link>, 해온 일은 <Link
-                  href="/projects">포트폴리오</Link
-                >, 공부와 기록은 <Link href="/blog">블로그</Link>에 있습니다.
-              </p>
-            </span>
-          </article>
+      <div class="mt-4 space-y-16">
+        <section class="space-y-3">
+          <p class="max-w-prose">
+            조이시티에서 게임 데이터로 마케팅·사업 의사결정을 돕습니다. SQL ·
+            Python · BigQuery로 분석하고, 검증된 수치 근거로 빠른 답보다
+            <span class="font-medium text-black dark:text-white">맞는 답</span
+            >을 찾는 데 집중합니다.
+          </p>
+          <p class="animate max-w-prose">
+            걸어온 길은 <Link href="/resume">이력서</Link>에, 해온 일은 아래에
+            정리했습니다.
+          </p>
         </section>
 
-        <section class="animate space-y-6">
-          <div class="flex flex-wrap items-center justify-between gap-y-2">
-            <h2 class="font-semibold text-black dark:text-white">
-              최근 글
-            </h2>
-            <Link href="/blog"> 전체 글 </Link>
+        <section class="animate space-y-5">
+          <div class="flex items-baseline justify-between">
+            <h2 class="font-semibold text-black dark:text-white">포트폴리오</h2>
+            <Link href="/projects">전체 보기</Link>
           </div>
-          <ul class="not-prose flex flex-col gap-4">
-            {
-              blog.map((post) => (
-                <li>
-                  <ArrowCard entry={post} />
-                </li>
-              ))
-            }
-          </ul>
-        </section>
-
-        <section class="animate space-y-6">
-          <div class="flex flex-wrap items-center justify-between gap-y-2">
-            <h2 class="font-semibold text-black dark:text-white">
-              포트폴리오
-            </h2>
-            <Link href="/projects"> 전체 보기 </Link>
-          </div>
-          <ul class="not-prose flex flex-col gap-4">
+          <ul class="not-prose flex flex-col">
             {
               projects.map((project) => (
-                <li>
-                  <ArrowCard entry={project} />
+                <li class="border-t border-black/10 last:border-b dark:border-white/15">
+                  <a
+                    href={`/projects/${project.id}`}
+                    class="group flex items-baseline justify-between gap-6 py-3.5 transition-colors duration-300 ease-in-out"
+                  >
+                    <span class="font-medium text-black/80 group-hover:text-black dark:text-white/80 dark:group-hover:text-white">
+                      {project.data.title}
+                    </span>
+                    <span class="shrink-0 text-sm text-black/50 tabular-nums dark:text-white/50">
+                      {project.data.result}
+                    </span>
+                  </a>
                 </li>
               ))
             }
           </ul>
         </section>
 
-        <section class="animate space-y-4">
-          <h2 class="font-semibold text-black dark:text-white">
-            연락하기
-          </h2>
-          <article>
-            <p>
-              분석/협업/채용 관련해서는 이메일로 편하게 연락 주세요.
-            </p>
-          </article>
-          <ul class="not-prose flex flex-wrap gap-2">
-            {
-              SOCIALS.map((SOCIAL) => (
-                <li class="flex gap-x-2 text-nowrap">
-                  <Link
-                    href={SOCIAL.HREF}
-                    external
-                    aria-label={`${SITE.TITLE} on ${SOCIAL.NAME}`}
-                  >
-                    {SOCIAL.NAME}
-                  </Link>
-                  {"/"}
-                </li>
-              ))
-            }
-            <li class="line-clamp-1">
+        <section class="animate space-y-5">
+          <div class="flex items-baseline justify-between">
+            <h2 class="font-semibold text-black dark:text-white">경력</h2>
+            <Link href="/resume">이력서</Link>
+          </div>
+          <ul class="not-prose flex flex-col">
+            <li
+              class="flex items-baseline justify-between gap-6 border-t border-black/10 py-3.5 dark:border-white/15"
+            >
+              <span>
+                <span
+                  class="block font-medium text-black/80 dark:text-white/80"
+                >
+                  조이시티 · Data Analyst
+                </span>
+                <span class="block text-sm text-black/50 dark:text-white/50">
+                  마케팅 · 사업 · 프로덕트 분석
+                </span>
+              </span>
+              <span
+                class="shrink-0 text-sm text-black/50 tabular-nums dark:text-white/50"
+              >
+                2023 — 현재
+              </span>
+            </li>
+            <li
+              class="flex items-baseline justify-between gap-6 border-y border-black/10 py-3.5 dark:border-white/15"
+            >
+              <span>
+                <span
+                  class="block font-medium text-black/80 dark:text-white/80"
+                >
+                  위스콘신 대학교
+                </span>
+                <span class="block text-sm text-black/50 dark:text-white/50">
+                  통계학 · 데이터 과학 복수 전공
+                </span>
+              </span>
+              <span
+                class="shrink-0 text-sm text-black/50 tabular-nums dark:text-white/50"
+              >
+                2017 — 2023
+              </span>
+            </li>
+          </ul>
+        </section>
+
+        <section class="animate">
+          <ul class="not-prose flex flex-wrap items-center gap-x-2 text-sm">
+            <li>
               <Link
                 href={`mailto:${SITE.EMAIL}`}
                 aria-label={`Email ${SITE.TITLE}`}
@@ -118,6 +117,20 @@ const projects: CollectionEntry<"projects">[] = (
                 {SITE.EMAIL}
               </Link>
             </li>
+            {
+              SOCIALS.map((SOCIAL) => (
+                <li class="flex items-center gap-x-2">
+                  <span aria-hidden="true">·</span>
+                  <Link
+                    href={SOCIAL.HREF}
+                    external
+                    aria-label={`${SITE.TITLE} on ${SOCIAL.NAME}`}
+                  >
+                    {SOCIAL.NAME}
+                  </Link>
+                </li>
+              ))
+            }
           </ul>
         </section>
       </div>

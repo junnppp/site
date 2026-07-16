@@ -3,8 +3,6 @@ title: Resume
 description: 박준혁 — Data Analyst 이력서. 조이시티에서 게임 데이터 기반 마케팅·사업 분석을 합니다.
 ---
 
-# Resume
-
 게임 데이터로 마케팅·사업 의사결정을 돕는 데이터 분석가입니다. SQL·Python·BigQuery로 분석하고, 검증된 수치 근거로 빠른 답보다 맞는 답을 찾는 데 집중합니다.
 
 ## Contact
