@@ -10,7 +10,9 @@ const on = "text-accent";
 const off = "text-sub hover:text-ink";
 ---
 
-<aside class="self-start sm:sticky sm:top-10">
+{/* transition:animate="none" — 페이지 전환 크로스페이드에서 제외해 사이드바 깜빡임 방지.
+    (persist 가 아니라 none 인 이유: DOM 은 교체돼야 현재 메뉴 하이라이트가 갱신된다) */}
+<aside class="self-start sm:sticky sm:top-10" transition:animate="none">
   <a href="/" class="font-semibold text-ink">{SITE.TITLE}</a>
   <p class="mb-7 text-sm text-sub">Data Analyst · Joycity</p>
   <nav
